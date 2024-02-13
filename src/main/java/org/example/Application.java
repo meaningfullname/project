@@ -3,9 +3,10 @@ package org.example;
 import java.sql.*;
 import java.util.Scanner;
 
-public abstract class Application {
+class Application {
 
     private  Scanner scanner;
+    Printtable table=new Printtable();
 
     public Application(){
         scanner = new Scanner(System.in);
@@ -37,10 +38,18 @@ public abstract class Application {
         }
         while (true) {
             System.out.println();
-            System.out.println("Welcome to My Application");
-            printTableUser(user);
+            System.out.println("Welcome to our Application");
+
             System.out.println("This table of user ,choose one of them ");
+            table.Print("Users");
+
             int option= scanner.nextInt();
+            UserCon(option);
+            System.out.println("Chose car that you want to buy");
+
+            table.Print("Cars");
+
+
 
 
 
@@ -51,66 +60,9 @@ public abstract class Application {
     }
 
 
-    public Application(String url, String user, String password) {
-
-    }
-    public void printTableUser(String tablename){
-        String sql = "SELECT * FROM " + tablename;
-
-        try (Connection conn = DriverManager.getConnection("","","");
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-
-            // Print column names
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            for (int i = 1; i <= columnCount; i++) {
-                System.out.print(metaData.getColumnName(i) + "\t");
-            }
-            System.out.println();
-
-            // Print rows
-            while (rs.next()) {
-                for (int i = 1; i <= columnCount; i++) {
-                    System.out.print(rs.getString(i) + "\t");
-                }
-                System.out.println();
-            }
-        } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-    }
 
 
-    public void printTable(String tableName) {
-        // SQL query to retrieve data from the table
-        String sql = "SELECT * FROM " + tableName;
-
-        try (Connection conn = DriverManager.getConnection("","","");
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-
-            // Print column names
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            for (int i = 1; i <= columnCount; i++) {
-                System.out.print(metaData.getColumnName(i) + "\t");
-            }
-            System.out.println();
-
-            // Print rows
-            while (rs.next()) {
-                for (int i = 1; i <= columnCount; i++) {
-                    System.out.print(rs.getString(i) + "\t");
-                }
-                System.out.println();
-            }
-        } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-    }
-    public UserCon(int option){
-        Statement stmt=null;
+    public void UserCon(int option){
         User user=null;
         try(Connection conn=DriverManager.getConnection("","","")){
             String sql="SELECT * FROM your_table_name LIMIT ?, 1";
@@ -136,18 +88,7 @@ public abstract class Application {
             }
 
 
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-
-    }
-
-
-
-
-
-
-
 }
+
+
+

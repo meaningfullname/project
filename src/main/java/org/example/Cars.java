@@ -56,7 +56,10 @@ public class Cars  {
         this.complication = complication;
     }
 
-
+    @Override
+    public String toString() {
+        return "Cars Brand "+ brand+" Model "+model+" Price "+price +" Equipment "+complication;
+    }
 }
 
 

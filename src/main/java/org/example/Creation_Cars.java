@@ -17,7 +17,7 @@ public class Creation_Cars implements CarsRepotisory {
 
         boolean created = false;
         if (cars.contains(car)) {
-            Cars car =new Cars(String name,String model,int price,String complec);
+
             created = repo.Creation(car);
             return ("Cars was created ");
 

@@ -47,5 +47,10 @@ public class User {
     public List<String> getCars() {
         return cars;
     }
+
+    @Override
+    public String toString() {
+        return "User name :"+name+" surname "+ surname+" wealth"+wealth+" .Cars that you have"+cars;
+    }
 }
-}
+

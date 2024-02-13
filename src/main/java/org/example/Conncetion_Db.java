@@ -10,19 +10,20 @@ public class Conncetion_Db implements DB {
     ResultSet rs = null;
     Statement stm=null;
     Connection conn;
-    try{
-        Class.forName("org.postgresql.Driver");
-        Connection conn= DriverManager.getConnection(connectionUrl,"postgres","123456");
+    public Connection getCon(){
+        try{
+            Class.forName("org.postgresql.Driver");
 
-        return conn;
+            Connection conn= DriverManager.getConnection(connectionUrl,"postgres","123456");
 
-    } catch(Exception e){
-        return null;
+            return conn;
 
+        } catch(Exception e){
+            return null;
+
+        }
     }
 
-    @Override
-    public Connection getCon() {
-        return null;
-    }
+
+
 }
