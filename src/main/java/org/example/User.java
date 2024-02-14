@@ -7,6 +7,13 @@ public class User {
     private String surname;
     private int wealth;
     private List<String> cars;
+    public User(String name, String surname, int wealth){
+        setName(name);
+        setSurname(surname);
+        setCars(cars);
+        setWealth(wealth);
+
+    }
 
     // Setter for name
     public void setName(String name) {

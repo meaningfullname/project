@@ -1,15 +1,13 @@
 
 package org.example;
 
-import java.sql.*;
-
 public class Cars  {
     private String brand;
     private String model;
     private int price;
     private String complication;
 
-    public Cars() {
+    public Cars(String carName, String brand, double price) {
 
     }
 
@@ -20,7 +18,7 @@ public class Cars  {
         setPrice(price);
     }
 
-    // Getter and Setter methods for Brand
+
     public String getBrand() {
         return brand;
     }
@@ -29,7 +27,7 @@ public class Cars  {
         this.brand = brand;
     }
 
-    // Getter and Setter methods for Model
+
     public String getModel() {
         return model;
     }
@@ -38,7 +36,6 @@ public class Cars  {
         this.model = model;
     }
 
-    // Getter and Setter methods for Price
     public int getPrice() {
         return price;
     }
@@ -47,7 +44,7 @@ public class Cars  {
         this.price = price;
     }
 
-    // Getter and Setter methods for Complication
+
     public String getComplication() {
         return complication;
     }
@@ -75,4 +72,4 @@ public class Cars  {
 
 
 
-}
+

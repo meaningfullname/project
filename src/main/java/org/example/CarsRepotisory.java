@@ -7,7 +7,7 @@ public interface CarsRepotisory {
 
 
 
-    boolean Creation (Cars cars);
-    Cars getCar(String modele);
+    static void Creation(Cars cars);
+
     List<Cars> getAllCars();
 }
