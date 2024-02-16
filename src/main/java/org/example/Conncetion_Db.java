@@ -14,7 +14,7 @@ public class Conncetion_Db implements DB {
         try{
             Class.forName("org.postgresql.Driver");
 
-            Connection conn= DriverManager.getConnection(connectionUrl,"postgres","123456");
+            Connection conn= DriverManager.getConnection(connectionUrl,"postgres","tryu1234");
 
             return conn;
 

@@ -1,9 +1,9 @@
 package org.example;
 
-import java.util.List;
-
 public interface UserRoptisory {
-    static void Creation(User user);
+    void creation(User user);
 
-    List<User> getAllUsers();
+    User getAllUsers();
+
+    void choose(int row);
 }
