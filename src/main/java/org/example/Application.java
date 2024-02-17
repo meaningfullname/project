@@ -1,7 +1,11 @@
 package org.example;
 
+import org.example.*;
+
 import java.util.List;
 import java.util.Scanner;
+
+
 
 public class Application {
     String url = "jdbc:postgresql://localhost:5432/Cars";
@@ -14,19 +18,7 @@ public class Application {
     static Scanner scanner = new Scanner(System.in);
 
     public void start() {
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 20; j++) {
-                if (i == 0  i == 19  j == 0  j == 19  (i == 10 && j == 10)) {
-                    System.out.print("*");
-                } else if (i == 9 && j == 5) {
-                    System.out.print("AUTO SELLING");
-                    j += 10;
-                } else {
-                    System.out.print(" ");
-                }
-            }
-            System.out.println();
-        }
+        printDesign();
 
         while (true) {
             System.out.println();
@@ -95,3 +87,17 @@ public class Application {
                             }
                         }
                     } else {
+                        System.out.println("User not found.");
+                    }
+                    break;
+                case 0:
+                    System.out.println("Exiting program");
+                    scanner.close();
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice");
+                    break;
+            }
+
+
+            System.out.print("Continue? (yes/no)
