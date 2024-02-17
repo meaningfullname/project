@@ -100,4 +100,4 @@ public class Application {
             }
 
 
-            System.out.print("Continue? (yes/no)")
+            System.out.print("Continue? (yes/no)");
