@@ -6,9 +6,9 @@ import java.util.Scanner;
 public class Application {
     String url = "jdbc:postgresql://localhost:5432/Cars";
     String user = "postgres";
-    String password = "123456";
+    String password = "tryu1234";
 
-    UserRoptisory userRep = new User_Repository(url, user, password);
+    UserRoptisory userRep = new User_Repository();
     CarsRepotisory carsRep = new Cars_Repository(url, user, password);
 
     static Scanner scanner = new Scanner(System.in);
@@ -16,7 +16,7 @@ public class Application {
     public void start() {
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 20; j++) {
-                if (i == 0 || i == 19 || j == 0 || j == 19 || (i == 10 && j == 10)) {
+                if (i == 0  i == 19  j == 0  j == 19  (i == 10 && j == 10)) {
                     System.out.print("*");
                 } else if (i == 9 && j == 5) {
                     System.out.print("AUTO SELLING");
@@ -52,7 +52,8 @@ public class Application {
                     System.out.print("Wealth: ");
                     int wealth = scanner.nextInt();
 
-                    User newUser = new User(name, surname, wealth);
+                    List<String> cars =null;
+                    User newUser = new User(name, surname, wealth, cars);
                     userRep.creation(newUser);
                     break;
                 case 2:
@@ -63,8 +64,10 @@ public class Application {
                     String brand = scanner.next();
                     System.out.print("Price: ");
                     double price = scanner.nextDouble();
+                    System.out.print("Equipment :");
+                    String equipment = scanner.next();
 
-                    Cars newCar = new Cars(carName, brand, price);
+                    Cars newCar = new Cars(carName, brand, price, equipment);
                     carsRep.creation(newCar);
                     break;
                 case 3:
@@ -77,12 +80,13 @@ public class Application {
                     break;
                 case 5:
                     System.out.println("Choose the user: ");
+                    userRep.getAllUsers();
                     int userId = scanner.nextInt();
                     userRep.choose(userId);
                     User selectedUser = userRep.getAllUsers();
                     if (selectedUser != null) {
                         System.out.println("Cars owned by " + selectedUser.getName() + " " + selectedUser.getSurname() + ":");
-                        List<String> cars = selectedUser.getCars();
+                        cars = List.of(selectedUser.getCars().toString());
                         if (cars.isEmpty()) {
                             System.out.println("No cars found for this user.");
                         } else {
@@ -91,17 +95,3 @@ public class Application {
                             }
                         }
                     } else {
-                        System.out.println("User not found.");
-                    }
-                    break;
-                case 0:
-                    System.out.println("Exiting program");
-                    scanner.close();
-                    System.exit(0);
-                default:
-                    System.out.println("Invalid choice");
-                    break;
-            }
-        }
-    }
-}
