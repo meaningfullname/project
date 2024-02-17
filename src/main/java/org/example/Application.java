@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Application {
     String url = "jdbc:postgresql://localhost:5432/Cars";
     String user = "postgres";
-    String password = "tryu1234";
+    String password = "13579";
 
     UserRoptisory userRep = new User_Repository();
     CarsRepotisory carsRep = new Cars_Repository(url, user, password);
@@ -18,7 +18,7 @@ public class Application {
     static Scanner scanner = new Scanner(System.in);
 
     public void start() {
-        printDesign();
+        toString();
 
         while (true) {
             System.out.println();
@@ -44,7 +44,7 @@ public class Application {
                     System.out.print("Wealth: ");
                     int wealth = scanner.nextInt();
 
-                    List<String> cars =null;
+                    List<String> cars = null;
                     User newUser = new User(name, surname, wealth, cars);
                     userRep.creation(newUser);
                     break;
@@ -98,6 +98,7 @@ public class Application {
                     System.out.println("Invalid choice");
                     break;
             }
-
-
             System.out.print("Continue? (yes/no)");
+        }
+    }
+}
