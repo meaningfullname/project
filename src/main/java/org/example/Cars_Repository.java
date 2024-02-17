@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Cars_Repository implements CarsRepotisory {
     private  String url;
+    Cars car=null;
     private String user;
 
     private String password;
@@ -17,13 +18,14 @@ public class Cars_Repository implements CarsRepotisory {
         this.password = password;
     }
 
+
     @Override
-    public void Creation(Cars cars) {
+    public void creation(Cars cars) {
         try{
             Class.forName("org.postgresql.Driver");
 
-            Connection conn= DriverManager.getConnection("jdbc:postgresql:localhost:5432/Cars","postgres","123456");
-            String sql="SELECT brand,modele,price,equipment FROM Cars";
+            Connection conn= DriverManager.getConnection("jdbc:postgresql:localhost:5432/Cars","postgres","tryu1234");
+            String sql="SELECT * FROM carss";
             Statement st=conn.prepareStatement(sql);
             ((PreparedStatement) st).setString(1, cars.getBrand());
             ((PreparedStatement) st).setString(2,cars.getModel());
@@ -40,24 +42,23 @@ public class Cars_Repository implements CarsRepotisory {
 
         }
 
+
     }
 
     @Override
-    public static List<Cars> getAllCars() {
-        List<Cars> carsList = new ArrayList<>();
+    public void getAllCars() {
+
         try {
             Class.forName("org.postgresql.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Cars", "postgres", "123456");
-            String sql = "SELECT brand, modele, price, equipment FROM Cars";
+            Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Cars", "postgres", "tryu1234");
+            String sql = "SELECT * FROM carss";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                String brand = rs.getString("brand");
-                String modele = rs.getString("modele");
-                int price = rs.getInt("price");
-                String equipment = rs.getString("equipment");
-                Cars car = new Cars(brand, modele, price, equipment);
-                carsList.add(car);
+                System.out.println("Brand : "+rs.getInt("brand") + "  Model: "
+                        + rs.getString("model") + "  Price :" + rs.getInt("price")+" Equipment: "+rs.getString("equipment"));
+
+
             }
             rs.close();
             st.close();
@@ -65,6 +66,34 @@ public class Cars_Repository implements CarsRepotisory {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return carsList;
+
     }
-}
+
+    @Override
+    public void chose(int row) {
+        try {
+            Class.forName("org.postgresql.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Cars", "postgres", "tryu1234");
+            String sql = "SELECT brand,modele,price,equipment FROM cars";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if(rs.absolute(row)){
+                car.setBrand(rs.getString("brand"));
+                car.setModel(rs.getString("modele"));
+                car.setPrice(rs.getInt("price"));
+                car.setComplication(rs.getString("cars"));
+            }
+
+
+
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+
+
+
+
+        }
+
+    }
+    }

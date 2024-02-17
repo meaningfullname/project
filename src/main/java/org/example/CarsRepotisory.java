@@ -7,7 +7,8 @@ public interface CarsRepotisory {
 
 
 
-    static void Creation(Cars cars);
+    void creation(Cars cars);
 
-    List<Cars> getAllCars();
+    void getAllCars();
+    void chose(int row);
 }
