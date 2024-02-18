@@ -12,7 +12,7 @@ public class User_Repository implements UserRoptisory{
     private String password;
 
 
-    public User_Repository(String url, String user, String password) {
+    public User_Repository() {
         this.url = url;
         this.user = user;
         this.password = password;
@@ -23,8 +23,8 @@ public class User_Repository implements UserRoptisory{
         try{
             Class.forName("org.postgresql.Driver");
 
-            Connection conn= DriverManager.getConnection("jdbc:postgresql:localhost:5432/User","postgres","tryu1234");
-            String sql="SELECT name,surname,wealth,cars FROM User";
+            Connection conn= DriverManager.getConnection("jdbc:postgresql:localhost:5432/Cars","postgres","tryu1234");
+            String sql="INSERT INTO users (name, surname, wealth, cars) VALUES (?, ?, ?, ?)";
             Statement st=conn.prepareStatement(sql);
             ((PreparedStatement) st).setString(1, user.getName());
             ((PreparedStatement) st).setString(2,user.getSurname());
@@ -48,12 +48,12 @@ public class User_Repository implements UserRoptisory{
 
         try {
             Class.forName("org.postgresql.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/User", "postgres", "tryu1234");
-            String sql = "SELECT name, surname, wealth, cars FROM User";
+            Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Cars", "postgres", "tryu1234");
+            String sql = "SELECT *FROM users";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                System.out.println(rs.getInt("price") + "  "
+                System.out.println(rs.getInt("wealth") + "  "
                         + rs.getString("surname") + "  " + rs.getString("name")+rs.getArray("cars"));
 
             }
@@ -71,8 +71,8 @@ public class User_Repository implements UserRoptisory{
     public void choose(int row) {
         try {
             Class.forName("org.postgresql.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/User", "postgres", "tryu1234");
-            String sql = "SELECT brand, modele,price,equipment  FROM cars";
+            Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Cars", "postgres", "tryu1234");
+            String sql = "SELECT *  FROM cars";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             if(rs.absolute(row)){
@@ -84,7 +84,7 @@ public class User_Repository implements UserRoptisory{
 
 
 
-            }catch (Exception e) {
+        }catch (Exception e) {
             System.out.println(e.getMessage());
 
 
@@ -94,4 +94,3 @@ public class User_Repository implements UserRoptisory{
 
     }
 }
-
