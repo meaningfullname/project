@@ -3,16 +3,25 @@ package org.example;
 import java.util.List;
 
 public class User {
+    private static int lastId = 0;
+    private int id;
     private String name;
     private String surname;
     private int wealth;
     private List<String> cars;
     public User(String name, String surname, int wealth){
+        this.id = ++lastId;
         setName(name);
         setSurname(surname);
-        setCars(cars);
+
         setWealth(wealth);
 
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public int getId() {
+        return id;
     }
 
     // Setter for name
@@ -46,18 +55,11 @@ public class User {
     }
 
     // Setter for cars
-    public void setCars(List<String> cars) {
-        this.cars = cars;
-    }
 
-    // Getter for cars
-    public List<String> getCars() {
-        return cars;
-    }
 
     @Override
     public String toString() {
-        return "User name :"+name+" surname "+ surname+" wealth"+wealth+" .Cars that you have"+cars;
+        return "User id"  +id+"User name :"+name+" surname "+ surname+" wealth"+wealth;
     }
 }
 

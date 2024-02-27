@@ -21,5 +21,5 @@ public interface CarsRepotisory {
     void creation(Cars cars);
 
     void getAllCars();
-    void chose(int row);
+    void choosecars(int row);
 }

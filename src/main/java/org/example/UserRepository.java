@@ -3,11 +3,11 @@ package org.example;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public interface UserRoptisory {
+public interface UserRepository {
 
     default Connection getCon() {
-        try (Connection result = new Conncetion_Db().getCon()) {
-            return result;
+        try (Connection resul = new Conncetion_Db().getCon()) {
+            return resul;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -18,4 +18,6 @@ public interface UserRoptisory {
     User getAllUsers();
 
     void choose(int row);
+
+    void update(User user);
 }

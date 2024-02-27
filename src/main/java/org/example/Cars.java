@@ -6,17 +6,25 @@ public class Cars  {
     private String model;
     private int price;
     private String equipment;
+    private int carscount;
 
 
 
-    public Cars(String name, String model, int price,String equipment) {
+    public Cars(String name, String model, int price,String equipment,int carscount) {
         setBrand(name);
         setModel(model);
         setEquipment(equipment);
         setPrice(price);
+        setCarscount(carscount);
     }
 
 
+    public void setCarscount(int carscount){
+        this.carscount=carscount;
+    }
+    public int getCarscount(){
+        return carscount;
+    }
     public String getBrand() {
         return brand;
     }
@@ -53,7 +61,7 @@ public class Cars  {
 
     @Override
     public String toString() {
-        return "Cars Brand "+ brand+" Model "+model+" Price "+price +" Equipment "+equipment;
+        return "Cars Brand "+ brand+" Model "+model+" Price "+price +" Equipment "+equipment +" Cars count :"+carscount;
     }
 }
 

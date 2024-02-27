@@ -12,7 +12,7 @@ public class Application {
     String user = "postgres";
     String password = "tryu1234";
 
-    UserRoptisory userRep = new User_Repository(url,user,password);
+    UserRepository userRep = new User_Repository(url,user,password);
     CarsRepotisory carsRep = new Cars_Repository(url, user, password);
 
     static Scanner scanner = new Scanner(System.in);
@@ -46,7 +46,7 @@ public class Application {
                     System.out.print("Wealth: ");
                     int wealth = scanner.nextInt();
 
-                    List<String> cars = null;
+
                     User newUser = new User(name, surname, wealth);
                     userRep.creation(newUser);
                     break;
@@ -60,8 +60,10 @@ public class Application {
                     int price = scanner.nextInt();
                     System.out.print("Equipment :");
                     String equipment = scanner.next();
+                    System.out.print(" Cars count :");
+                    int carscount = scanner.nextInt();
 
-                    Cars newCar = new Cars(carName, brand, price, equipment);
+                    Cars newCar = new Cars(carName, brand, price, equipment,carscount);
                     carsRep.creation(newCar);
                     break;
                 case 3:
@@ -73,25 +75,25 @@ public class Application {
                     carsRep.getAllCars();
                     break;
                 case 5:
-                    System.out.println("Choose the user: ");
+                    System.out.println("Choose the user");
                     userRep.getAllUsers();
-                    int userId = scanner.nextInt();
-                    userRep.choose(userId);
-                    User selectedUser = userRep.getAllUsers();
-                    if (selectedUser != null) {
-                        System.out.println("Cars owned by " + selectedUser.getName() + " " + selectedUser.getSurname() + ":");
-                        cars = List.of(selectedUser.getCars().toString());
-                        if (cars.isEmpty()) {
-                            System.out.println("No cars found for this user.");
-                        } else {
-                            for (String car : cars) {
-                                System.out.println(car);
-                            }
-                        }
-                    } else {
-                        System.out.println("User not found.");
+                    int optionforuser=scanner.nextInt();
+                    userRep.choose(optionforuser);
+                    System.out.println("Choose the car");
+                    carsRep.getAllCars();
+                    int optionforcars=scanner.nextInt();
+                    carsRep.choosecars(optionforcars);
+                    Cars car=null;
+                    User user=null;
+                    int newwealth;
+                    if(car.getPrice()>user.getWealth()){
+                        System.out.println("User doesn't have enough money");
+                    }else{
+                        newwealth=user.getWealth()-car.getPrice();
+
+                        System.out.println("User buyed car");
                     }
-                    break;
+
                 case 0:
                     System.out.println("Exiting program");
                     scanner.close();

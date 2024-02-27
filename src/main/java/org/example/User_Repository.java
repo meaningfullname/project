@@ -1,16 +1,15 @@
 package org.example;
 
 import java.sql.*;
-import java.util.List;
 
-public class User_Repository implements UserRoptisory,DB{
+public class User_Repository implements UserRepository,DB {
 
-    User user12=null;
+    User users = null;
+    private int lastId = 0;
 
-    private  String url;
+    private String url;
     private String user;
     private String password;
-
 
 
     public User_Repository(String url, String user, String password) {
@@ -21,14 +20,14 @@ public class User_Repository implements UserRoptisory,DB{
 
     @Override
     public Connection getCon() {
-        try{
+        try {
             Class.forName("org.postgresql.Driver");
 
-            Connection conn= DriverManager.getConnection(url,user,password);
+            Connection conn = DriverManager.getConnection(url, user, password);
 
             return conn;
 
-        } catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
 
@@ -37,34 +36,31 @@ public class User_Repository implements UserRoptisory,DB{
 
     @Override
     public void creation(User user) {
-        try(Connection conn=getCon()){
+        try (Connection conn = getCon()) {
 
-            String sql="SELECT name,surname,wealth,cars FROM users";
-            Statement st=conn.prepareStatement(sql);
-            ((PreparedStatement) st).setString(1, user.getName());
-            ((PreparedStatement) st).setString(2,user.getSurname());
-            ((PreparedStatement) st).setInt(3,user.getWealth());
+            String sql = "INSERT INTO users (name, surname, wealth) VALUES (?, ?, ?)";
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, ++lastId);
+            st.setString(2, user.getName());
+            st.setString(3, user.getSurname());
+            st.setInt(4, user.getWealth());
 
 
-
-            ((PreparedStatement) st).executeUpdate();
+            st.executeUpdate();
             st.close();
             conn.close();
-
-
-        } catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
-
-
         }
 
     }
+
     public User getAllUsers() {
-        Statement st=null;
-        ResultSet rs=null;
+        Statement st = null;
+        ResultSet rs = null;
 
 
-        try(Connection conn=getCon()) {
+        try (Connection conn = getCon()) {
 
             String sql = "SELECT * FROM users";
             st = conn.createStatement();
@@ -88,27 +84,35 @@ public class User_Repository implements UserRoptisory,DB{
 
     @Override
     public void choose(int row) {
-        try(Connection conn=getCon()) {
-
-            String sql = "SELECT brand, modele,price,equipment  FROM cars";
+        try (Connection conn = getCon()) {
+            String sql = "SELECT * FROM users";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
-            if(rs.absolute(row)){
-                user12.setName(rs.getString("name"));
-                user12.setSurname(rs.getString("surname"));
-                user12.setWealth(rs.getInt("wealth"));
-                user12.setCars((List<String>) rs.getArray("cars"));
+            if (rs.absolute(row)) {
+                User user = new User(rs.getString("name"), rs.getString("surname"), rs.getInt("wealth"));
+                user.setId(rs.getInt("id"));
+                System.out.println("Selected user: " + user);
             }
-
-
-
-            }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
-
-
-
-
         }
+
+    }
+
+    @Override
+    public void update(User user) {
+        try (Connection conn = getCon()) {
+            String sql = "UPDATE users SET wealth = row WHERE id = row";
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, user.getWealth());
+            st.setInt(2, user.getId());
+
+            st.executeUpdate();
+            st.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
 
     }
 }

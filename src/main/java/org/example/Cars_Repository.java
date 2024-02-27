@@ -37,12 +37,13 @@ public class Cars_Repository implements CarsRepotisory,DB {
     public void creation(Cars cars) {
         try(Connection conn=getCon()){
 
-            String sql="INSERT INTO cars (brand, model, price, equipment) VALUES (?, ?, ?, ?)";
+            String sql="INSERT INTO cars (brand, model, price, equipment,carscount) VALUES (?, ?, ?, ?)";
             PreparedStatement st=conn.prepareStatement(sql);
             st.setString(1, cars.getBrand());
             st.setString(2, cars.getModel());
             st.setInt(3, cars.getPrice());
             st.setString(4, cars.getComplication());
+            st.setInt(5,cars.getCarscount());
 
             st.executeUpdate();
             st.close();
@@ -63,7 +64,8 @@ public class Cars_Repository implements CarsRepotisory,DB {
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 System.out.println("Brand : "+rs.getString("brand") + "  Model: "
-                        + rs.getString("model") + "  Price :" + rs.getInt("price")+" Equipment: "+rs.getString("equipment"));
+                        + rs.getString("model") + "  Price :" + rs.getInt("price")+
+                        " Equipment: "+rs.getString("equipment")+" Cars count : "+ rs.getInt("countofcars"));
 
 
             }
@@ -77,12 +79,12 @@ public class Cars_Repository implements CarsRepotisory,DB {
     }
 
     @Override
-    public void chose(int row) {
+    public void choosecars(int row) {
         try(Connection conn=getCon()){
 
 
 
-            String sql = "SELECT brand,modele,price,equipment FROM cars";
+            String sql = "SELECT *FROM cars";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             if(rs.absolute(row)){
@@ -90,6 +92,7 @@ public class Cars_Repository implements CarsRepotisory,DB {
                 car.setModel(rs.getString("modele"));
                 car.setPrice(rs.getInt("price"));
                 car.setEquipment(rs.getString("cars"));
+                car.setCarscount(rs.getInt("countofcars"));
             }
 
 
