@@ -8,19 +8,21 @@ import java.util.Scanner;
 
 
 public class Application {
-    String url = "jdbc:postgresql://localhost:5432/Cars";
+    String url = "jdbc:postgresql://localhost:5432/postgres";
     String user = "postgres";
-    String password = "13579";
+    String password = "tryu1234";
 
-    UserRoptisory userRep = new User_Repository();
+    UserRoptisory userRep = new User_Repository(url,user,password);
     CarsRepotisory carsRep = new Cars_Repository(url, user, password);
 
     static Scanner scanner = new Scanner(System.in);
 
     public void start() {
-        toString();
+        designOfApplication(20, 10);
+
 
         while (true) {
+
             System.out.println();
             System.out.println("Welcome to our Application");
             System.out.println("This table of user, choose one of them ");
@@ -45,7 +47,7 @@ public class Application {
                     int wealth = scanner.nextInt();
 
                     List<String> cars = null;
-                    User newUser = new User(name, surname, wealth, cars);
+                    User newUser = new User(name, surname, wealth);
                     userRep.creation(newUser);
                     break;
                 case 2:
@@ -55,7 +57,7 @@ public class Application {
                     System.out.print("Brand: ");
                     String brand = scanner.next();
                     System.out.print("Price: ");
-                    double price = scanner.nextDouble();
+                    int price = scanner.nextInt();
                     System.out.print("Equipment :");
                     String equipment = scanner.next();
 
@@ -98,7 +100,65 @@ public class Application {
                     System.out.println("Invalid choice");
                     break;
             }
+
+
             System.out.print("Continue? (yes/no)");
+            scanner.nextLine();
+            String choice =scanner.nextLine().trim();
+            choice.toLowerCase();
+            if(!choice.equalsIgnoreCase("yes")){
+                System.out.println("Exiting program");
+                scanner.close();
+                return;
+            }
+
+
+
         }
+
+    }
+
+
+    public void designOfApplication(int width, int height) {
+
+        printLine(width);
+
+
+        for (int i = 0; i < height; i++) {
+            if (i == height / 2) {
+                printCenteredText("AUTOSALLON", width);
+            } else {
+                System.out.print("*");
+                printSpaces(width - 2);
+                System.out.println("*");
+            }
+        }
+
+
+        printLine(width);
+    }
+
+    public static void printLine(int length) {
+        for (int i = 0; i < length; i++) {
+            System.out.print("*");
+        }
+        System.out.println();
+    }
+
+    public void printSpaces(int count) {
+        for (int i = 0; i < count; i++) {
+            System.out.print(" ");
+        }
+    }
+
+    public void printCenteredText(String text, int width) {
+        int padding = (width - text.length()) / 2;
+        printSpaces(padding);
+        System.out.print(text);
+        printSpaces(padding);
+        if ((width - text.length()) % 2 != 0) {
+            System.out.print(" ");
+        }
+        System.out.println();
     }
 }

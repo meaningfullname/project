@@ -1,29 +1,26 @@
 package org.example;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Conncetion_Db implements DB {
-    String connectionUrl="jdbc:postgresql:localhost:5432/Cars";
-    ResultSet rs = null;
-    Statement stm=null;
-    Connection conn;
-    public Connection getCon(){
-        try{
+    private static final String connectionUrl = "jdbc:postgresql://localhost:5432/postgres";
+    private static Connection conn;
+
+    public Connection getCon() {
+        try {
             Class.forName("org.postgresql.Driver");
-
-            Connection conn= DriverManager.getConnection(connectionUrl,"postgres","tryu1234");
-
+            conn = DriverManager.getConnection("postgresql://localhost:5432/postgres", "postgres", "tryu1234");
             return conn;
-
-        } catch(Exception e){
-            return null;
-
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Driver not found", e);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
         }
     }
-
-
-
 }
+
+
+
+

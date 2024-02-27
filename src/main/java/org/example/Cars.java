@@ -5,16 +5,14 @@ public class Cars  {
     private String brand;
     private String model;
     private int price;
-    private String complication;
+    private String equipment;
 
-    public Cars(String carName, String brand, double price) {
 
-    }
 
-    public Cars(String name, String model, int price,String complec) {
+    public Cars(String name, String model, int price,String equipment) {
         setBrand(name);
         setModel(model);
-        setComplication(complec);
+        setEquipment(equipment);
         setPrice(price);
     }
 
@@ -46,16 +44,16 @@ public class Cars  {
 
 
     public String getComplication() {
-        return complication;
+        return equipment;
     }
 
-    public void setComplication(String complication) {
-        this.complication = complication;
+    public void setEquipment(String equipment) {
+        this.equipment = equipment;
     }
 
     @Override
     public String toString() {
-        return "Cars Brand "+ brand+" Model "+model+" Price "+price +" Equipment "+complication;
+        return "Cars Brand "+ brand+" Model "+model+" Price "+price +" Equipment "+equipment;
     }
 }
 
