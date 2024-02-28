@@ -90,6 +90,8 @@ public class Application {
                         System.out.println("User doesn't have enough money");
                     }else{
                         newwealth=user.getWealth()-car.getPrice();
+                        int newcarscount=car.getCarscount()-1;
+
 
                         System.out.println("User buyed car");
                     }

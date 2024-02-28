@@ -108,5 +108,21 @@ public class Cars_Repository implements CarsRepotisory,DB {
 
     }
 
+    @Override
+    public void update(Cars cars) {
+        try (Connection conn = getCon()) {
+            String sql = "UPDATE cars SET carscount = newcarscount WHERE id = row";
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setInt(1, cars.getCarscount());
+                stmt.setInt(2, cars.getId());
+
+                stmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();  // Handle exceptions appropriately
+        }
+
+    }
+
 
 }

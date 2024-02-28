@@ -22,4 +22,5 @@ public interface CarsRepotisory {
 
     void getAllCars();
     void choosecars(int row);
+    void update(Cars cars);
 }
